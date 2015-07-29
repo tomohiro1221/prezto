@@ -48,16 +48,17 @@ alias sftp='noglob sftp'
 # Define general aliases.
 alias _='sudo'
 alias b='${(z)BROWSER}'
-alias cp="${aliases[cp]:-cp} -i"
 alias e='${(z)VISUAL:-${(z)EDITOR}}'
-alias ln="${aliases[ln]:-ln} -i"
 alias mkdir="${aliases[mkdir]:-mkdir} -p"
-alias mv="${aliases[mv]:-mv} -i"
 alias p='${(z)PAGER}'
-alias po='popd'
-alias pu='pushd'
-alias rm="${aliases[rm]:-rm} -i"
 alias type='type -a'
+# I don't use these 
+# alias cp="${aliases[cp]:-cp} -i"
+# alias rm="${aliases[rm]:-rm} -i"
+# alias rm="${aliases[rm]:-rm} -i"
+# alias ln="${aliases[ln]:-ln} -i"
+# alias po='popd'
+# alias pu='pushd'
 
 # ls
 if is-callable 'dircolors'; then
@@ -76,13 +77,16 @@ if is-callable 'dircolors'; then
     alias ls="${aliases[ls]:-ls} -F"
   fi
 else
-  # BSD Core Utilities
+  # BSD Core Utilities (OS X)
   if zstyle -t ':prezto:module:utility:ls' color; then
     # Define colors for BSD ls.
-    export LSCOLORS='exfxcxdxbxGxDxabagacad'
+    # I don't like blue
+    # export LSCOLORS='exfxcxdxbxGxDxabagacad'
+    export LSCOLORS='GxfxcxdxbxGxDxabagacad'
 
     # Define colors for the completion system.
-    export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
+    # export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
+    export LS_COLORS='di=36;01:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
 
     alias ls="${aliases[ls]:-ls} -G"
   else
@@ -100,7 +104,7 @@ alias lk='ll -Sr'        # Lists sorted by size, largest last.
 alias lt='ll -tr'        # Lists sorted by date, most recent last.
 alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
 alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
-alias sl='ls'            # I often screw this up.
+# alias sl='ls'            # I often screw this up.
 
 # Grep
 if zstyle -t ':prezto:module:utility:grep' color; then
@@ -164,30 +168,31 @@ alias http-serve='python -m SimpleHTTPServer'
 # Functions
 #
 
-# Makes a directory and changes to it.
-function mkdcd {
-  [[ -n "$1" ]] && mkdir -p "$1" && builtin cd "$1"
-}
+# I don't use these
+# # Makes a directory and changes to it.
+# function mkdcd {
+#   [[ -n "$1" ]] && mkdir -p "$1" && builtin cd "$1"
+# }
 
-# Changes to a directory and lists its contents.
-function cdls {
-  builtin cd "$argv[-1]" && ls "${(@)argv[1,-2]}"
-}
+# # Changes to a directory and lists its contents.
+# function cdls {
+#   builtin cd "$argv[-1]" && ls "${(@)argv[1,-2]}"
+# }
 
-# Pushes an entry onto the directory stack and lists its contents.
-function pushdls {
-  builtin pushd "$argv[-1]" && ls "${(@)argv[1,-2]}"
-}
+# # Pushes an entry onto the directory stack and lists its contents.
+# function pushdls {
+#   builtin pushd "$argv[-1]" && ls "${(@)argv[1,-2]}"
+# }
 
-# Pops an entry off the directory stack and lists its contents.
-function popdls {
-  builtin popd "$argv[-1]" && ls "${(@)argv[1,-2]}"
-}
+# # Pops an entry off the directory stack and lists its contents.
+# function popdls {
+#   builtin popd "$argv[-1]" && ls "${(@)argv[1,-2]}"
+# }
 
-# Prints columns 1 2 3 ... n.
-function slit {
-  awk "{ print ${(j:,:):-\$${^@}} }"
-}
+# # Prints columns 1 2 3 ... n.
+# function slit {
+#   awk "{ print ${(j:,:):-\$${^@}} }"
+# }
 
 # Finds files and executes a command on them.
 function find-exec {
